@@ -41,6 +41,11 @@ jobs:
             build \
             CONFIGURATION_BUILD_DIR=${{ github.workspace }}/build
 
+      - name: Boot simulator
+        run: |
+          xcrun simctl boot "iPhone 16" || true
+          xcrun simctl bootstatus "iPhone 16" -b
+
       - name: Start Appium server
         run: appium &
 
