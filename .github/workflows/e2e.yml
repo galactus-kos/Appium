@@ -44,6 +44,13 @@ jobs:
       - name: Start Appium server
         run: appium &
 
+      - name: Wait for Appium to be ready
+        run: |
+          for i in {1..30}; do
+            curl -s http://localhost:4723/status && break
+            sleep 1
+          done
+
       - name: Run E2E tests
         working-directory: e2e
         env:
