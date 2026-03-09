@@ -53,7 +53,7 @@ exports.config = {
       // capabilities for local Appium web tests on iOS
       platformName: "iOS",
       "appium:deviceName": "iPhone 16",
-      "appium:platformVersion": "18.x",
+      "appium:platformVersion": "18.6",
       "appium:automationName": "XCUITest",
       "appium:app":
         process.env.APP_PATH ||
