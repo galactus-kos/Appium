@@ -1,0 +1,51 @@
+name: E2E Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  e2e:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: List available simulators
+        run: xcrun simctl list devices available
+
+      - name: Install npm dependencies
+        working-directory: e2e
+        run: npm install
+
+      - name: Install Appium and XCUITest driver
+        run: |
+          npm install -g appium
+          appium driver install xcuitest
+
+      - name: Build iOS app
+        run: |
+          xcodebuild \
+            -project LoginPlayground.xcodeproj \
+            -scheme LoginPlayground \
+            -destination 'platform=iOS Simulator,name=iPhone 16,OS=latest' \
+            -configuration Debug \
+            build \
+            CONFIGURATION_BUILD_DIR=${{ github.workspace }}/build
+
+      - name: Start Appium server
+        run: appium &
+
+      - name: Run E2E tests
+        working-directory: e2e
+        env:
+          APP_PATH: ${{ github.workspace }}/build/LoginPlayground.app
+        run: npm run wdio
