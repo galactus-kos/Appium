@@ -6,35 +6,30 @@ const password = 'automation'
 const wrongUsername = 'blablabla'
 wrongPassword = 'blablabla'
 
-describe.skip('Login positive flow', () => {
-    it ('Login page has required UI elements', async () => {
-        
-        // Perform UI checks
-        await loginPage.checkUi()
+describe("Login positive flow", () => {
+  it("Login page has required UI elements", async () => {
+    // Perform UI checks
+    await loginPage.checkUi();
+  });
 
-    })
+  it("Should successfully login with valid credentials", async () => {
+    // perform login
+    await loginPage.login(username, password);
 
-    it('Should successfully login with valid credentials', async () => {
-        
-        // perform login
-        await loginPage.login(username, password)
+    // close Saving Password popup
+    await loginPage.closePasswordSavingPopup();
 
-        // close Saving Password popup
-        await loginPage.closePasswordSavingPopup()
-        
-        // check the Success page UI
-        await successPage.isDisplayed(username)
-        await browser.pause(4000)
+    // check the Success page UI
+    await successPage.isDisplayed(username);
+    await browser.pause(4000);
+  });
 
-    })
-
-    it ('Log out performed correctly', async () => {
-        
-        // perform logout
-        await successPage.logout()
-        await loginPage.checkCred(username, password)
-    })
-})
+  it("Log out performed correctly", async () => {
+    // perform logout
+    await successPage.logout();
+    await loginPage.checkCred(username, password);
+  });
+});
 
 describe.skip('Login negative flow', () => {
     it ('Login with incorrect creds', async () => {
@@ -42,19 +37,13 @@ describe.skip('Login negative flow', () => {
     })
 })
 
-describe('several logins in a row', () => {
-    it ('Log in using corrects credentials several times', async () => {
-        await loginPage.login(username, password)
-        for (let i =0; i<3; i++) {
-            await loginPage.relogin(username, password)
-            await browser.pause(2000)
-        }
-        await loginPage.attemptsError()
-        
-        // await loginPage.relogin(username, password)
-        // await browser.pause(2000)
-        // await loginPage.relogin(username, password)
-        // await browser.pause(2000)
-        // await loginPage.relogin(username, password)
-    })
-})
+describe.skip("several logins in a row", () => {
+  it("Log in using corrects credentials several times", async () => {
+    await loginPage.login(username, password);
+    for (let i = 0; i < 3; i++) {
+      await loginPage.relogin(username, password);
+      await browser.pause(2000);
+    }
+    await loginPage.attemptsError();
+  });
+});
