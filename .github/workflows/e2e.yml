@@ -43,8 +43,10 @@ jobs:
 
       - name: Boot simulator
         run: |
+          open -a Simulator
           xcrun simctl boot "iPhone 16" || true
           xcrun simctl bootstatus "iPhone 16" -b
+          sleep 15
 
       - name: Start Appium server
         run: appium &

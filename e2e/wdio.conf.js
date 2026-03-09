@@ -55,6 +55,9 @@ exports.config = {
       "appium:deviceName": "iPhone 16",
       "appium:platformVersion": "18.6",
       "appium:automationName": "XCUITest",
+      "appium:wdaLaunchTimeout": 300000,
+      "appium:wdaConnectionTimeout": 300000,
+      "appium:simulatorStartupTimeout": 300000,
       "appium:app":
         process.env.APP_PATH ||
         "/Users/dmitriytsvetkov/Library/Developer/Xcode/DerivedData/LoginPlayground-bfqdluheotlmfcbtwmbfpepilxmh/Build/Products/Debug-iphonesimulator/LoginPlayground.app",
