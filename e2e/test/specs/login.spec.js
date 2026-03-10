@@ -8,7 +8,7 @@ const wrongPassword = "blablabla";
 
 describe("Login positive flow", () => {
   it("Login page has required UI elements", async () => {
-    // Perform UI checks
+    // check required UI elements presented
     await loginPage.checkUi();
   });
 
@@ -25,13 +25,12 @@ describe("Login positive flow", () => {
 
     // check the Success page UI
     await successPage.isDisplayed(username);
-    await browser.pause(4000);
   });
 
   it("Log out performed correctly", async () => {
     // perform logout
     await successPage.logout();
-    await loginPage.checkCred(username, password);
+    await loginPage.checkUi();
   });
 });
 

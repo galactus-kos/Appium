@@ -49,6 +49,9 @@ class LoginPage extends Page {
     // checking the default username value is displaying
     await expect(this.usernameField).toHaveAttr("value", "Username");
 
+    // checking the default password value is displaying
+    await expect(this.passwordField).toHaveAttr("value", "Password");
+
     // check the password field is hiding input
     await expect(this.passwordField).toHaveAttr(
       "type",
@@ -78,6 +81,7 @@ class LoginPage extends Page {
 
     // check the password field is not empty
     const passwordValue = await this.passwordField.getAttribute("value");
+    await expect(passwordValue).not.toBe("Password");
     await expect(passwordValue.length).toBeGreaterThan(0);
   }
 
@@ -120,6 +124,8 @@ class LoginPage extends Page {
     } catch (error) {}
   }
 
+  // check the log in button is only active when
+  // both fields username and password are filled
   async checkLoginButton(username, password) {
     await this.usernameField.setValue(username);
     await expect(this.loginButton).toHaveAttr("enabled", "false");

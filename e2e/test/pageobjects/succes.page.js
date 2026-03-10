@@ -25,9 +25,11 @@ class SuccessPage extends Page {
 
     // perform logout
     async logout() {
-        // check the logout button is active and tap on it
-        await expect(this.logoutButton).toHaveAttr('enabled', 'true')
-        await this.logoutButton.click()
+      // check the logout button is active and tap on it
+      await this.logoutButton.waitForDisplayed();
+      await this.logoutButton.waitForEnabled();
+      // await expect(this.logoutButton).toHaveAttr('enabled', 'true')
+      await this.logoutButton.click();
     }
 }
 
