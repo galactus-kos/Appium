@@ -4,12 +4,16 @@ const successPage = require('../pageobjects/succes.page')
 const username = 'qa'
 const password = 'automation'
 const wrongUsername = 'blablabla'
-wrongPassword = 'blablabla'
+const wrongPassword = "blablabla";
 
 describe("Login positive flow", () => {
   it("Login page has required UI elements", async () => {
     // Perform UI checks
     await loginPage.checkUi();
+  });
+
+  it("Login button requires both fields to be filed", async () => {
+    await loginPage.checkLoginButton(username, password);
   });
 
   it("Should successfully login with valid credentials", async () => {
@@ -31,13 +35,20 @@ describe("Login positive flow", () => {
   });
 });
 
-describe.skip('Login negative flow', () => {
-    it ('Login with incorrect creds', async () => {
-        await loginPage.wrongCreds(wrongUsername, wrongPassword)
-    })
-})
+describe("Login negative flow", () => {
+  it("Login with incorrect creds", async () => {
+    await loginPage.wrongCreds(wrongUsername, wrongPassword);
+  });
+});
 
+
+// since there is no solid requirement for the rate limit popup I can't 
+// cover it with e2e tests properly
+// this test will fail randomly until there is no clear behaviour defined
 describe.skip("several logins in a row", () => {
+  before(async () => {
+    await browser.reloadSession();
+  });
   it("Log in using corrects credentials several times", async () => {
     await loginPage.login(username, password);
     for (let i = 0; i < 3; i++) {
