@@ -9,7 +9,7 @@ john / letmein
 ## Some issues were found during the tests. 
 ## They might cause the test fail.
 ## I decided not to fix them because the test's purpose 
-## is to fail if some issue occures
+## is to fail if some issue occurs
 
 ## BUG-001: Log in is stucked in progress
 Severity: High   
@@ -25,7 +25,7 @@ infinite loading w/o Success screen
 
 Comment: is flaky
 
-## BUG-002: Rate limit popup occures randomly
+## BUG-002: Rate limit popup occurs randomly
 Severity: High
 Steps:
 - enter valid credentials
